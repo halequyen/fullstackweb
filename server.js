@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== 'production'){
-    require('dotenv').load()
-}
-
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
@@ -15,8 +11,9 @@ app.use(expressLayouts)
 app.use(express.static('public'))
 
 const mongoose = require('mongoose')
-mongoose.connect(process.env.DATABASE_URL, {
-    useNewUrlParser: true
+mongoose.connect('mongodb://localhost:27017/mybrary', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 })
 const db = mongoose.connection
 db.on('error', error => console.error(error))
